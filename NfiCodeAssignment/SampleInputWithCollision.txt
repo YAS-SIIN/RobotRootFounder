@@ -1,0 +1,18 @@
+# The number of robots
+3
+
+# The number of time steps
+2
+
+# The robots and their (x, y) origins
+A, 0, 0
+B, 10, 0
+C, 0, 10
+
+# The assigned position in each time step
+0, A, 1, 2
+1, A, 1, 1
+0, B, 4, 6
+1, B, 4, 7
+0, C, 1, 6
+1, C, 6, 6

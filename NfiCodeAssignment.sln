@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NfiCodeAssignment", "NfiCodeAssignment\NfiCodeAssignment.csproj", "{F9807CE9-1B5E-42E6-BBCD-54B86A218426}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NfiCodeAssignmentTest", "NfiCodeAssignmentTest\NfiCodeAssignmentTest.csproj", "{6ED1187C-445B-41FA-A0F7-3912E0AA0E7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9807CE9-1B5E-42E6-BBCD-54B86A218426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9807CE9-1B5E-42E6-BBCD-54B86A218426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9807CE9-1B5E-42E6-BBCD-54B86A218426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9807CE9-1B5E-42E6-BBCD-54B86A218426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ED1187C-445B-41FA-A0F7-3912E0AA0E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ED1187C-445B-41FA-A0F7-3912E0AA0E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ED1187C-445B-41FA-A0F7-3912E0AA0E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ED1187C-445B-41FA-A0F7-3912E0AA0E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
