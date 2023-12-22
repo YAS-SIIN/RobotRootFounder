@@ -144,7 +144,7 @@ namespace NfiCodeAssignment.Services
                 || Robot1OriginPositon.PositionY >= Robot2CurrentPositon.PositionY
                 || Robot1CurrentPositon.PositionY >= Robot2OriginPositon.PositionY);
  
-            return x1 && x2 && y1 && y2dd;
+            return x1 && x2 && y1 && y2;
         }
 
 
