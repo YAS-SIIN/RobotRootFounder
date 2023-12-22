@@ -35,13 +35,13 @@ namespace NfiCodeAssignment
             if (scheduleIsValid)
             {
                 Console.WriteLine($"The schedule `{filePath}` is valid. No collisions were found.");
-                Console.ReadLine();
+                //Console.ReadLine();
                 return 0;
             }
             else
             {
                 Console.WriteLine($"The schedule `{filePath}` is invalid! At least one collision was found.");
-                Console.ReadLine();
+                //Console.ReadLine();
                 return 2;
             }
 

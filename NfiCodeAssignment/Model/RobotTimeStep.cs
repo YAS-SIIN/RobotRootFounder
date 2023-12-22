@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 
 namespace NfiCodeAssignment.Model
 {
-    public class Robot
+    public class RobotTimeStep
     {
+        /// <summary>
+        /// Step number
+        /// </summary>
+        public int StepNumber { get; set; }
+
         /// <summary>
         /// Robot identity key
         /// </summary>
-        public string Id { get; set; }
-         
+        public string RobotId { get; set; }
+
         /// <summary>
-        /// Origin position
+        /// Visited position
         /// </summary>
-        public Positon OriginPositon { get; set; }
+        public Positon VisitedPositon { get; set; }
  
     }
 }
