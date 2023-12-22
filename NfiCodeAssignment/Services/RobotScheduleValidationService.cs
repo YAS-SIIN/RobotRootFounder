@@ -27,39 +27,74 @@ namespace NfiCodeAssignment.Services
             // Check the "Readme.pdf" file in the root folder of this project for instructions!
             // Once you have finished implementing this function and all test cases succeed, you are done.
 
-            var robots = ParseRobots(lines);
-            var timeSteps = ParseTimeSteps(lines);
+            List<Robot> robots = ParseRobots(lines);
+            List<RobotPositon> robotPositions = ParseRobotPositions(lines);
 
             // Iterate through each time step
-            for (int timeStepIndex = 0; timeStepIndex < timeSteps.Count; timeStepIndex++)
-            {
-                var currentStep = timeSteps[timeStepIndex];
+            foreach (RobotPositon currentRobotPosition in robotPositions)
+            {  
+                //Get another robots
+                List<RobotPositon> otherRobots = robotPositions.Where(x => x.RobotId != currentRobotPosition.RobotId).ToList();
+                var currentRobotNextPosition = robotPositions.Where(x => x.RobotId == currentRobotPosition.RobotId).Skip(1).FirstOrDefault();
 
                 // Check collisions for each pair of robots
-                for (int i = 0; i < robots.Count; i++)
+                foreach (RobotPositon nextRobotPosition in otherRobots)
                 {
-                    for (int j = i + 1; j < robots.Count; j++)
+                    var nextRobotNextPosition = otherRobots.Where(x => x.RobotId == nextRobotPosition.RobotId).Skip(1).FirstOrDefault();
+                    // Check for collision using the formula
+                    if (DoRectanglesOverlap(
+                            currentRobotPosition.Positon.PositionX, currentRobotPosition.Positon.PositionY, currentRobotNextPosition.Positon.PositionX, currentRobotNextPosition.Positon.PositionY,
+                            nextRobotPosition.Positon.PositionX, nextRobotPosition.Positon.PositionY, nextRobotNextPosition.Positon.PositionX, nextRobotNextPosition.Positon.PositionY))
                     {
-                        var robotA = robots[i];
-                        var robotB = robots[j];
-
-                        // Check for collision using the formula
-                        if (DoRectanglesOverlap(
-                                robotA.OriginX, robotA.OriginY, robotA.CurrentX, robotA.CurrentY,
-                                robotB.OriginX, robotB.OriginY, robotB.CurrentX, robotB.CurrentY))
-                        {
-                            Console.WriteLine($"Collision detected at time step {timeStepIndex} between {robotA.Id} and {robotB.Id}.");
-                            return false; // Collision found, schedule is invalid
-                        }
+                        Console.WriteLine($"Collision detected at time step {currentRobotPosition.StepNumber} between {currentRobotPosition.RobotId} and {nextRobotPosition.RobotId}.");
+                        return false; // Collision found, schedule is invalid
                     }
                 }
 
+                //// Check collisions for each pair of robots
+                //foreach (Robot robot1 in robots)
+                //{
+                //    //Get another robots
+                //    List<Robot> otherRobots1 = robots.Where(x => x.Id != robot1.Id).ToList();
+                //    foreach (Robot robot2 in otherRobots)
+                //    {
+                //        // Check for collision using the formula
+                //        if (DoRectanglesOverlap(
+                //                robot1.OriginX, robot1.OriginY, robot1.CurrentX, robot1.CurrentY,
+                //                robot2.OriginX, robot2.OriginY, robot2.CurrentX, robot2.CurrentY))
+                //        {
+                //            Console.WriteLine($"Collision detected at time step {currentRobotPosition.StepNumber} between {robot1.Id} and {robot2.Id}.");
+                //            return false; // Collision found, schedule is invalid
+                //        }
+                //    }
+                //}
+
+
+                //// Check collisions for each pair of robots
+                //for (int i = 0; i < robots.Count; i++)
+                //{
+                //    for (int j = i + 1; j < robots.Count; j++)
+                //    {
+                //        var robotA = robots[i];
+                //        var robotB = robots[j];
+
+                //        // Check for collision using the formula
+                //        if (DoRectanglesOverlap(
+                //                robotA.OriginX, robotA.OriginY, robotA.CurrentX, robotA.CurrentY,
+                //                robotB.OriginX, robotB.OriginY, robotB.CurrentX, robotB.CurrentY))
+                //        {
+                //            Console.WriteLine($"Collision detected at time step {currentStep.StepNumber} between {robotA.Id} and {robotB.Id}.");
+                //            return false; // Collision found, schedule is invalid
+                //        }
+                //    }
+                //}
+
                 // Update robot positions for the next time step
 
-                var robot = robots.Find(r => r.Id == currentStep.RobotId);
-                robot.CurrentX = currentStep.PositionX;
-                robot.CurrentY = currentStep.PositionY;
-
+                //var robot = robots.Find(r => r.Id == currentStep.RobotId);
+                //robot.CurrentX = currentStep.PositionX;
+                //robot.CurrentY = currentStep.PositionY;
+        
             }
 
             return true; // No collisions found, schedule is valid
@@ -80,14 +115,13 @@ namespace NfiCodeAssignment.Services
 
 
         /// <summary>
-        /// Parse robots
+        /// Parse robot lists
         /// </summary>
         /// <param name="lines"></param>
         /// <returns></returns>
         private List<Robot> ParseRobots(List<string> lines)
         {
-            var robotLines = lines.TakeWhile(line => !line.Contains("#")).ToList();
-            return robotLines.Where(line => line.Split(',').Length == 3).Select(line =>
+            return lines.Where(line => line.Split(',').Length == 3).Select(line =>
             {
                 var parts = line.Split(',').Select(part => part.Trim()).ToList();
                 return new Robot
@@ -96,29 +130,27 @@ namespace NfiCodeAssignment.Services
                     OriginX = int.Parse(parts[1]),
                     OriginY = int.Parse(parts[2]),
                     CurrentX = int.Parse(parts[1]), // Initial position is the origin
-                    CurrentY = int.Parse(parts[2])
+                    CurrentY = int.Parse(parts[2])  // Initial position is the origin
                 };
             }).ToList();
         }
 
 
         /// <summary>
-        /// Parse time steps
+        /// Parse time step lists
         /// </summary>
         /// <param name="lines"></param>
         /// <returns></returns>
-        private List<TimeStep> ParseTimeSteps(List<string> lines)
-        {
-            var timeStepLines = lines.SkipWhile(line => !line.Contains("#")).Skip(1).ToList();
-            return timeStepLines.Select(line =>
+        private List<RobotPositon> ParseRobotPositions(List<string> lines)
+        { 
+            return lines.Where(line => line.Split(',').Length == 4).Select(line =>
             {
                 var parts = line.Split(',').Select(part => part.Trim()).ToList();
-                return new TimeStep
+                return new RobotPositon
                 {
                     StepNumber = int.Parse(parts[0]),
                     RobotId = parts[1],
-                    PositionX = int.Parse(parts[2]),
-                    PositionY = int.Parse(parts[3])
+                    Positon = new Positon(int.Parse(parts[2]), int.Parse(parts[3]))
                 };
             }).ToList();
         }
@@ -126,18 +158,18 @@ namespace NfiCodeAssignment.Services
         /// <summary>
         /// Rectangle overlap formula
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="x3"></param>
-        /// <param name="y3"></param>
-        /// <param name="x4"></param>
-        /// <param name="y4"></param>
+        /// <param name="Robot1OriginX">Robot 1 origin X position</param>
+        /// <param name="Robot1OriginY">Robot 1 origin Y position</param>
+        /// <param name="Robot1CurrentX">Robot 1 ccurren X position</param>
+        /// <param name="Robot1CurrentY">Robot 1 ccurren Y position</param>
+        /// <param name="Robot2OriginX">Robot 2 origin X position</param>
+        /// <param name="Robot2OriginY">Robot 2 origin Y position</param>
+        /// <param name="Robot2CurrentX">Robot 2 ccurren X position</param>
+        /// <param name="Robot2CurrentY">Robot 2 ccurren Y position</param>
         /// <returns></returns>
-        private bool DoRectanglesOverlap(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
+        private bool DoRectanglesOverlap(int Robot1OriginX, int Robot1OriginY, int Robot1CurrentX, int Robot1CurrentY, int Robot2OriginX, int Robot2OriginY, int Robot2CurrentX, int Robot2CurrentY)
         {
-            return x1 <= x4 && x2 >= x3 && y1 <= y4 && y2 >= y3;
+            return Robot1OriginX <= Robot2CurrentX && Robot1CurrentX >= Robot2OriginX && Robot1OriginY <= Robot2CurrentY && Robot1CurrentY >= Robot2OriginY;
         }
 
     }
