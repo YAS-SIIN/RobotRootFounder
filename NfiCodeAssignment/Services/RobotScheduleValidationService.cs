@@ -57,7 +57,7 @@ namespace NfiCodeAssignment.Services
                     }
                 }
 
-            } 
+            }
 
             return true; // No collisions found, schedule is valid
         }
@@ -124,12 +124,29 @@ namespace NfiCodeAssignment.Services
         /// <returns></returns>
         private bool DoRectanglesOverlap(Positon Robot1OriginPositon, Positon Robot1CurrentPositon, Positon Robot2OriginPositon, Positon Robot2CurrentPositon)
         {
-            return Robot1OriginPositon.PositionX <= Robot2CurrentPositon.PositionX
-                && Robot1CurrentPositon.PositionX >= Robot2OriginPositon.PositionX
-                && Robot1OriginPositon.PositionY >= Robot2CurrentPositon.PositionY
-                && Robot1CurrentPositon.PositionY <= Robot2OriginPositon.PositionY;
+            int MaxRobot1X = Math.Max(Robot1OriginPositon.PositionX, Robot1CurrentPositon.PositionX);
+            int MaxRobot2X = Math.Max(Robot2OriginPositon.PositionX, Robot2CurrentPositon.PositionX);
+            int MaxRobot1Y = Math.Max(Robot1OriginPositon.PositionY, Robot1CurrentPositon.PositionY);
+            int MaxRobot2Y = Math.Max(Robot2OriginPositon.PositionY, Robot2CurrentPositon.PositionY);
+
+            int MinRobot1X = Math.Min(Robot1OriginPositon.PositionX, Robot1CurrentPositon.PositionX);
+            int MinRobot2X = Math.Min(Robot2OriginPositon.PositionX, Robot2CurrentPositon.PositionX);
+            int MinRobot1Y = Math.Min(Robot1OriginPositon.PositionY, Robot1CurrentPositon.PositionY);
+            int MinRobot2Y = Math.Min(Robot2OriginPositon.PositionY, Robot2CurrentPositon.PositionY);
+
+            var x1 = MaxRobot1X >= MinRobot2X && MinRobot1Y <= MaxRobot2Y;
+            var x2 = MaxRobot1X >= MinRobot2X && MaxRobot1Y >= MinRobot2Y;
+            var y1 = MinRobot1X <= MaxRobot2X && MaxRobot1Y >= MinRobot2Y;
+            var y2 = MinRobot1X <= MaxRobot2X && MinRobot1Y <= MaxRobot2Y;
+ 
+            var mm = (Robot1OriginPositon.PositionX <= Robot2CurrentPositon.PositionX
+                || Robot1CurrentPositon.PositionX >= Robot2OriginPositon.PositionX
+                || Robot1OriginPositon.PositionY >= Robot2CurrentPositon.PositionY
+                || Robot1CurrentPositon.PositionY >= Robot2OriginPositon.PositionY);
+ 
+            return x1 && x2 && y1 && y2dd;
         }
-        
+
 
     }
 
