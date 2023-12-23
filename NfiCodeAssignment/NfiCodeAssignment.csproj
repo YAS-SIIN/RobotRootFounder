@@ -39,9 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ValueObject\Position.cs" />
-    <Compile Include="Model\Robot.cs" />
-    <Compile Include="Model\RobotTimeStep.cs" />
+    <Compile Include="Models\Robot.cs" />
+    <Compile Include="Models\RobotTimeStep.cs" />
+    <Compile Include="ValueObjects\Position.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Services\RobotScheduleValidationService.cs" />
   </ItemGroup>

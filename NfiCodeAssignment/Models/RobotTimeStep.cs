@@ -1,10 +1,12 @@
-﻿using System;
+﻿using NfiCodeAssignment.ValueObjects;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NfiCodeAssignment.Model
+namespace NfiCodeAssignment.Models
 {
     public class RobotTimeStep
     {

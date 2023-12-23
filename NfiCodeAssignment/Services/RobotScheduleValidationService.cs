@@ -1,4 +1,5 @@
-﻿using NfiCodeAssignment.Model;
+﻿using NfiCodeAssignment.Models;
+using NfiCodeAssignment.ValueObjects;
 
 using System;
 using System.Collections.Generic;

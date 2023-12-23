@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NfiCodeAssignment.Model
+namespace NfiCodeAssignment.ValueObjects
 {
     public class Position
     {
@@ -18,7 +18,8 @@ namespace NfiCodeAssignment.Model
         /// </summary>
         public int PositionY { get; set; }
 
-        public Position(int positionX, int positionY)
+        public Position
+            (int positionX, int positionY)
         {
             PositionX = positionX;
             PositionY = positionY;
