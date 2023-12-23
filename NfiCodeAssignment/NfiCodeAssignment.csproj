@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ValueObject\Positon.cs" />
+    <Compile Include="ValueObject\Position.cs" />
     <Compile Include="Model\Robot.cs" />
     <Compile Include="Model\RobotTimeStep.cs" />
     <Compile Include="Program.cs" />

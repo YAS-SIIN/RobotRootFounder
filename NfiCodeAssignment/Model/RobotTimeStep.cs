@@ -21,7 +21,7 @@ namespace NfiCodeAssignment.Model
         /// <summary>
         /// Visited position
         /// </summary>
-        public Positon VisitedPositon { get; set; }
+        public Position VisitedPosition { get; set; }
  
     }
 }

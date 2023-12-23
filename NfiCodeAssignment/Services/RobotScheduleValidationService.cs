@@ -49,7 +49,7 @@ namespace NfiCodeAssignment.Services
                         Robot otherRobot = robots.Where(x => x.Id == otherRobotTimeSteps.RobotId).FirstOrDefault();
                         // Check for collision using the formula
                         if (DoRectanglesOverlap(
-                                currentRobot.OriginPositon, currentRobotTimeStep.VisitedPositon, otherRobot.OriginPositon, otherRobotTimeSteps.VisitedPositon))
+                                currentRobot.OriginPosition, currentRobotTimeStep.VisitedPosition, otherRobot.OriginPosition, otherRobotTimeSteps.VisitedPosition))
                         {
                             Console.WriteLine($"Collision detected at time step {currentRobotTimeStep.StepNumber} between {currentRobotTimeStep.RobotId} and {otherRobotTimeSteps.RobotId}.");
                             return false; // Collision found, schedule is invalid
@@ -89,7 +89,7 @@ namespace NfiCodeAssignment.Services
                 return new Robot
                 {
                     Id = parts[0],
-                    OriginPositon = new Positon(int.Parse(parts[1]), int.Parse(parts[2]))
+                    OriginPosition = new Position(int.Parse(parts[1]), int.Parse(parts[2]))
                 };
             }).ToList();
         }
@@ -109,7 +109,7 @@ namespace NfiCodeAssignment.Services
                 {
                     StepNumber = int.Parse(parts[0]),
                     RobotId = parts[1],
-                    VisitedPositon = new Positon(int.Parse(parts[2]), int.Parse(parts[3]))
+                    VisitedPosition = new Position(int.Parse(parts[2]), int.Parse(parts[3]))
                 };
             }).ToList();
         }
@@ -117,22 +117,22 @@ namespace NfiCodeAssignment.Services
         /// <summary>
         /// Rectangle overlap formula
         /// </summary>
-        /// <param name="robot1OriginPositon">Robot 1 origin position</param>
-        /// <param name="robot1CurrentPositon">Robot 1 ccurren position</param>
-        /// <param name="robot2OriginPositon">Robot 2 origin position</param>
-        /// <param name="robot2CurrentPositon">Robot 2 ccurren position</param>
+        /// <param name="robot1OriginPosition">Robot 1 origin position</param>
+        /// <param name="robot1CurrentPosition">Robot 1 ccurren position</param>
+        /// <param name="robot2OriginPosition">Robot 2 origin position</param>
+        /// <param name="robot2CurrentPosition">Robot 2 ccurren position</param>
         /// <returns></returns>
-        private bool DoRectanglesOverlap(Positon robot1OriginPositon, Positon robot1CurrentPositon, Positon robot2OriginPositon, Positon robot2CurrentPositon)
+        private bool DoRectanglesOverlap(Position robot1OriginPosition, Position robot1CurrentPosition, Position robot2OriginPosition, Position robot2CurrentPosition)
         {
-            int maxRobot1X = Math.Max(robot1OriginPositon.PositionX, robot1CurrentPositon.PositionX);
-            int maxRobot2X = Math.Max(robot2OriginPositon.PositionX, robot2CurrentPositon.PositionX);
-            int maxRobot1Y = Math.Max(robot1OriginPositon.PositionY, robot1CurrentPositon.PositionY);
-            int maxRobot2Y = Math.Max(robot2OriginPositon.PositionY, robot2CurrentPositon.PositionY);
+            int maxRobot1X = Math.Max(robot1OriginPosition.PositionX, robot1CurrentPosition.PositionX);
+            int maxRobot2X = Math.Max(robot2OriginPosition.PositionX, robot2CurrentPosition.PositionX);
+            int maxRobot1Y = Math.Max(robot1OriginPosition.PositionY, robot1CurrentPosition.PositionY);
+            int maxRobot2Y = Math.Max(robot2OriginPosition.PositionY, robot2CurrentPosition.PositionY);
 
-            int minRobot1X = Math.Min(robot1OriginPositon.PositionX, robot1CurrentPositon.PositionX);
-            int minRobot2X = Math.Min(robot2OriginPositon.PositionX, robot2CurrentPositon.PositionX);
-            int minRobot1Y = Math.Min(robot1OriginPositon.PositionY, robot1CurrentPositon.PositionY);
-            int minRobot2Y = Math.Min(robot2OriginPositon.PositionY, robot2CurrentPositon.PositionY);
+            int minRobot1X = Math.Min(robot1OriginPosition.PositionX, robot1CurrentPosition.PositionX);
+            int minRobot2X = Math.Min(robot2OriginPosition.PositionX, robot2CurrentPosition.PositionX);
+            int minRobot1Y = Math.Min(robot1OriginPosition.PositionY, robot1CurrentPosition.PositionY);
+            int minRobot2Y = Math.Min(robot2OriginPosition.PositionY, robot2CurrentPosition.PositionY);
 
             var x1 = maxRobot1X >= minRobot2X && minRobot1Y <= maxRobot2Y;
             var x2 = maxRobot1X >= minRobot2X && maxRobot1Y >= minRobot2Y;

@@ -16,7 +16,7 @@ namespace NfiCodeAssignment.Model
         /// <summary>
         /// Origin position
         /// </summary>
-        public Positon OriginPositon { get; set; }
+        public Position OriginPosition { get; set; }
  
     }
 }

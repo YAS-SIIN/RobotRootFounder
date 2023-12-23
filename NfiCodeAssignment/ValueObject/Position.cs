@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NfiCodeAssignment.Model
 {
-    public class Positon
+    public class Position
     {
         /// <summary>
         /// Position X
@@ -18,7 +18,7 @@ namespace NfiCodeAssignment.Model
         /// </summary>
         public int PositionY { get; set; }
 
-        public Positon(int positionX, int positionY)
+        public Position(int positionX, int positionY)
         {
             PositionX = positionX;
             PositionY = positionY;
