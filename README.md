@@ -1,3 +1,6 @@
+NFI coding assignment
+This assignment asks you to implement a validation program that checks whether a schedule is valid. A
+schedule contains the following data:
 
 1. A set of 1 or more robots. Each robot has an origin point, which is an (x, y) coordinate.
 2. A set of 1 or more time steps. In each time step, each of the robots will visit a specific (x, y) position.
