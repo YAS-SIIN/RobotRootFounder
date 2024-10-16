@@ -1,6 +1,6 @@
 
 
-This assignment asks you to implement a validation program that checks whether a schedule is valid. A
+This application implements a validation program that checks whether a schedule is valid. A
 schedule contains the following data:
 
 1. A set of 1 or more robots. Each robot has an origin point, which is an (x, y) coordinate.
@@ -45,7 +45,7 @@ See (Tip 1) for a formula that you can use to determine whether two rectangles o
 
 # Requirements
 
-The goal of this assignment is to implement a validation program, that checks whether a given schedule is
+The goal of this application is to implement a validation program, that checks whether a given schedule is
 valid. Read through the provided code and test cases before starting. The provided test cases will check if
 your code functions correctly. We will also manually check whether the code you submit is well written. Make
 sure your code is of high quality and easy to understand!
