@@ -1,4 +1,4 @@
-NFI coding assignment.
+
 
 This assignment asks you to implement a validation program that checks whether a schedule is valid. A
 schedule contains the following data:
